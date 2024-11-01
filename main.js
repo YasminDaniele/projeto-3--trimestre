@@ -40,6 +40,7 @@ function geraSenha (){
         console.log( letrasMaiusculas[numeroAleatorio]);
     }
     campoSenha.value = letrasMaiusculas; 
+    classificaSenha(alfabeto.length);
 }
 
 function diminuiTamanho(){
@@ -66,7 +67,7 @@ function aumentaTamanho() {
 classificaSenha();
 }
 
-function classificaSenha(){
+function classificaSenha(tamanhoAlfabeto){
     forcaSenha.classList.remove('fraca','media','forte');
     if (tamanhoSenha > 11){
     forcaSenha.classList.add('forte');
@@ -76,3 +77,18 @@ function classificaSenha(){
         forcaSenha.classList.add('fraca');
     }
 }
+
+function classificaSenha(tamanhoAlfabeto){
+        let entropia = tamanhoSenha * Math.log2(alfabeto.length);
+        if (entropia > 57){
+            forcaSenha.classList.add('forte');
+        } else if (entropia > 35 && entropia < 57 ){
+            forcaSenha.classList.add('media'); 
+            forcaSenha.classList.add('fraca');
+        }
+        const valorEntropia = document.querySelector('.entropia');
+        valorEntropia.textContent = 2**Math.floor(entropia)/(100e6*60*60*24);
+        console.log(entropia);
+    }
+   
+
